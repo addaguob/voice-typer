@@ -2,7 +2,7 @@ import whisper
 import os
 
 class Transcriber:
-    def __init__(self, model_name="turbo"):
+    def __init__(self, model_name="small.en"):
         print(f"Loading Whisper model '{model_name}'...")
         self.model = whisper.load_model(model_name)
         print("Model loaded.")

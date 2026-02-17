@@ -1,6 +1,6 @@
 # Voice Typer
 
-A simple voice typing application for Linux Mint using OpenAI Whisper (using the `turbo` model for high accuracy).
+A simple voice typing application for Linux Mint using OpenAI Whisper (using the `small.en` model.
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ A simple voice typing application for Linux Mint using OpenAI Whisper (using the
    # OR if running without venv
    sudo python3 src/main.py
    ```
-4. Press `Ctrl+Alt+Space` to toggle recording. (Note: The first run will download the large `turbo` model, which may take some time).
+4. Press `Ctrl+Alt+Space` to toggle recording. (Note: The first run will download the `small.en` model, which may take some time; about 461MB/47secs).
 5. Speak, and the text will be typed into the active window.
 
 ## Troubleshooting
