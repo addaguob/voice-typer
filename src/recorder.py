@@ -17,9 +17,17 @@ class AudioRecorder:
         print("Recording started...")
         self.is_recording = True
         self.recording = []
-        # Non-blocking stream
-        self.stream = sd.InputStream(samplerate=self.fs, channels=1, callback=self.callback)
-        self.stream.start()
+        try:
+            # Non-blocking stream
+            self.stream = sd.InputStream(samplerate=self.fs, channels=1, callback=self.callback)
+            self.stream.start()
+        except Exception as e:
+            print(f"Error starting recording: {e}")
+            self.is_recording = False
+            if self.stream:
+                self.stream.close()
+            self.stream = None
+            raise e
 
     def callback(self, indata, frames, time, status):
         if status:

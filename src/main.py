@@ -1,4 +1,5 @@
 import os
+import time
 import signal
 import keyboard
 import sounddevice as sd
@@ -24,8 +25,12 @@ def play_sound(freq=440, duration=0.1):
     fs = 44100
     t = np.linspace(0, duration, int(fs * duration), endpoint=False)
     wave = 0.5 * np.sin(2 * np.pi * freq * t)
-    sd.play(wave, fs)
-    sd.wait()
+    try:
+        sd.play(wave, fs)
+        sd.wait()
+    except Exception as e:
+        print(f"Warning: Audio device unavailable for playback ({e}). Skipping beep.")
+        time.sleep(duration)
 
 def notify(title, message):
     """Send a system notification."""
@@ -84,8 +89,14 @@ def on_activate():
         # Start recording
         print("Start command received.")
         play_sound(880, 0.1) # High beep for start
-        recorder.start()
-        notify("Voice Typer", "Listening...")
+        try:
+            recorder.start()
+            notify("Voice Typer", "Listening...")
+        except Exception as e:
+            msg = f"Failed to start recording: {e}"
+            print(msg)
+            notify("Voice Typer", msg)
+            play_sound(200, 0.5) # Error beep
 
 def main():
     print("Initializing Voice Typer...")

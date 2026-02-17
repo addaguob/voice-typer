@@ -1,6 +1,6 @@
 # Voice Typer
 
-A simple voice typing application for Linux Mint using OpenAI Whisper (using the `small.en` model.
+A simple voice typing application for Linux Mint using OpenAI Whisper (using the `small.en` model).
 
 ## Prerequisites
 
